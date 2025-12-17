@@ -1,6 +1,4 @@
-# app/models/branch.py
-from sqlalchemy import Column, Integer, String, Date, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String, Date
 from core.db import Base
 
 

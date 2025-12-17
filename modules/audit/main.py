@@ -10,7 +10,7 @@ except ModuleNotFoundError as e:
 		"Install them with: `python -m pip install -r requirements.txt` in `modules/audit`"
 	) from e
 
-from routes import auth, admin, logs, employees, profile, users
+from routes import auth, admin, logs, employees, profile, users, branches, departments, inventory_items
 
 
 Base.metadata.create_all(bind=engine)
@@ -32,3 +32,6 @@ app.include_router(logs.router, prefix="/admin")
 app.include_router(profile.router, prefix="/profile")
 app.include_router(users.router, prefix="/users")
 app.include_router(employees.router, prefix="/employees")
+app.include_router(branches.router, prefix="/branches")
+app.include_router(departments.router, prefix="/departments")
+app.include_router(inventory_items.router, prefix="/inventory")

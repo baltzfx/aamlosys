@@ -32,6 +32,12 @@ def create_user(data: UserCreate, db: Session = Depends(get_db), admin=Depends(r
     db.refresh(user)
     return user
 
+@router.get("/{user_id}", response_model=UserOut)
+def get_user(user_id: int, db: Session = Depends(get_db), admin=Depends(require_admin)):
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        raise HTTPException(404, "User not found")
+    return user
 
 @router.patch("/{user_id}", response_model=UserOut)
 def update_user(user_id: int, data: UserUpdate, db: Session = Depends(get_db), admin=Depends(require_admin)):

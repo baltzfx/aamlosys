@@ -1,42 +1,31 @@
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel
 from typing import Optional
-
+from .branch import BranchRead
 
 class DepartmentBase(BaseModel):
-    code: str = Field(min_length=1, max_length=30)
-    name: str = Field(min_length=1, max_length=200)
-    description: Optional[str] = None
-
-    @field_validator(
-        "code", "name", "description",
-        mode="before", check_fields=False
-    )
-    def empty_string_to_none(cls, v):
-        if v == "" or v == 0:
-            return None
-        return v   
+    code: Optional[str] = None
+    department: Optional[str] = None
+    group: Optional[str] = None
+    section: Optional[str] = None
+    unit: Optional[str] = None
+    branch_id: Optional[int] = None
+    remarks: Optional[str] = None
 
 class DepartmentCreate(DepartmentBase):
     pass
 
-
 class DepartmentUpdate(BaseModel):
     code: Optional[str] = None
-    name: Optional[str] = None
-    description: Optional[str] = None
-    
-    @field_validator(
-        "code", "name", "description",
-        mode="before", check_fields=False
-    )
-    def empty_string_to_none(cls, v):
-        if v == "" or v == 0:
-            return None
-        return v    
-
+    department: Optional[str] = None
+    group: Optional[str] = None
+    section: Optional[str] = None
+    unit: Optional[str] = None
+    branch_id: Optional[int] = None
+    remarks: Optional[str] = None
 
 class DepartmentRead(DepartmentBase):
     id: int
+    branch: Optional[BranchRead] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True

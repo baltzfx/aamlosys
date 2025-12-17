@@ -1,0 +1,16 @@
+1. Create NextJS APP
+npx create-next-app@latest "appname" --yes
+
+2. cd appname
+3. Install shadcn ui
+npx shadcn@latest init
+
+This will create components.json file and components/ui folder
+
+4. Adding components
+npx shadcn@latest add button
+npx shadcn@latest add input
+npx shadcn@latest add label
+npx shadcn@latest add card
+npx shadcn@latest add alert
+etc.
