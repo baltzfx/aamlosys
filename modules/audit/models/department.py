@@ -6,7 +6,7 @@ class Department(Base):
     __tablename__ = "departments"
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    code = Column(String(30), unique=True, index=True, nullable=True)         # changed
+    code = Column(String(30), index=True, nullable=True)         # changed
     department = Column(String(200), nullable=True)                            # changed
     group = Column(String(200), nullable=True)                                 # changed
     section = Column(String(200), nullable=True)                               # changed

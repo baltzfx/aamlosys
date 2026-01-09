@@ -6,11 +6,12 @@ from models.employee_assignment import EmployeeAssignment
 from schemas.employee_assignment import (
     EmployeeAssignmentCreate,
     EmployeeAssignmentUpdate,
-    EmployeeAssignmentRead
+    EmployeeAssignmentRead,
+    EmployeeAssignmentResponse
 )
 from typing import List
 
-router = APIRouter(prefix="/employee-assignments", tags=["Employee Assignments"])
+router = APIRouter()
 
 
 # CREATE
@@ -27,10 +28,17 @@ def create_assignment(
     return assignment
 
 
-# LIST ALL
-@router.get("/", response_model=List[EmployeeAssignmentRead])
-def list_assignments(db: Session = Depends(get_db), user=Depends(require_session)):
-    return db.query(EmployeeAssignment).all()
+# routes/employee_assignments.py
+@router.get("/", response_model=list[EmployeeAssignmentResponse])
+def list_assignments(
+    employee_id: int | None = None,  # <-- query param
+    db: Session = Depends(get_db),
+):
+    q = db.query(EmployeeAssignment)
+    if employee_id is not None:
+        q = q.filter(EmployeeAssignment.employee_id == employee_id)
+    return q.all()
+
 
 
 # GET BY ID
@@ -60,7 +68,6 @@ def update_assignment(
     db.commit()
     db.refresh(assignment)
     return assignment
-
 
 # DELETE
 @router.delete("/{assignment_id}")

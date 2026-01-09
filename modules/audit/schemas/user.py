@@ -27,11 +27,11 @@ class UserCreate(UserBase):
     password: str
 
 class UserUpdate(BaseModel):
-    username: Optional[str]
-    email: Optional[str]
-    role: Optional[str]
-    status: Optional[str]
-    employee_id: Optional[int]
+    username: Optional[str] = None
+    email: Optional[str] = None
+    role: Optional[str] = None
+    status: Optional[str] = None
+    employee_id: Optional[int] = None
 
 class UserOut(UserBase):
     id: int

@@ -17,5 +17,5 @@ class EmployeeAssignment(Base):
     branch_id = Column(Integer, ForeignKey("branches.id"), nullable=False)
     department_id = Column(Integer, ForeignKey("departments.id"), nullable=False)
 
-    start_assignment = Column(DateTime(timezone=True), server_default=func.now())
-    end_assignment = Column(DateTime(timezone=True), nullable=True)
+    start_date = Column(DateTime(timezone=True), server_default=func.now())
+    end_date = Column(DateTime(timezone=True), nullable=True)

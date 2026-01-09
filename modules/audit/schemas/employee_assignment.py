@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
-from datetime import datetime
+from datetime import datetime, date
 from .branch import BranchRead
 from .department import DepartmentRead
 
@@ -60,3 +60,25 @@ class EmployeeAssignmentRead(EmployeeAssignmentBase):
 
     class Config:
         from_attributes = True
+
+
+class EmployeeAssignmentResponse(BaseModel):
+    id: int
+
+    employee_id: int
+    branch_id: Optional[int] = None
+    department_id: Optional[int] = None
+
+    supervisor_id: Optional[int] = None
+    manager_id: Optional[int] = None
+
+    job_title: Optional[str] = None
+    start_assignment: Optional[date] = None
+    end_assignment: Optional[date] = None
+
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+
+    model_config = {
+        "from_attributes": True
+    }
